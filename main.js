@@ -101,7 +101,6 @@
   intro.from(nameWords, { yPercent: 60, opacity: 0, duration: 1, stagger: 0.1 }, '-=0.45')
        .from('.hero-photo', { clipPath: 'inset(0 0 100% 0)', duration: 1.1, ease: 'power4.inOut' }, '<')
        .from('.hero-role, .hero-where', { y: 18, opacity: 0, duration: 0.7, stagger: 0.08 }, '-=0.6')
-       .from('.sticky', { scale: 0.6, opacity: 0, rotate: 8, duration: 0.6, ease: 'back.out(1.6)' }, '-=0.4')
        .from('.nav', { opacity: 0, duration: 0.6 }, '-=0.6');
 
   /* ---------- hero photo drifts as you leave ---------- */
