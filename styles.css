@@ -137,6 +137,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.03em; line-height: 
 
 .row-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s cubic-bezier(.2,.8,.2,1); }
 .row[open] .row-body { grid-template-rows: 1fr; }
+.row.instant .row-body { transition: none; }
 .row-body-inner { overflow: hidden; }
 .row-body .row-shot { border-radius: 14px; margin: 0 clamp(8px, 2vw, 48px) 32px; width: calc(100% - 2 * clamp(8px, 2vw, 48px)); }
 .row-text {

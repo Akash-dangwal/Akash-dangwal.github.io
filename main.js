@@ -15,10 +15,18 @@
 
   /* ---------- work rows: one open at a time ---------- */
   var rows = Array.prototype.slice.call(document.querySelectorAll('.row'));
+  var lenis = null; /* assigned later if smooth scroll is on */
   rows.forEach(function (row) {
     row.addEventListener('toggle', function () {
       if (!row.open) return;
-      rows.forEach(function (o) { if (o !== row && o.open) o.open = false; });
+      /* close the others without animating, so the layout settles at once */
+      rows.forEach(function (o) {
+        if (o !== row && o.open) { o.classList.add('instant'); o.open = false; void o.offsetHeight; o.classList.remove('instant'); }
+      });
+      /* then bring the clicked row to the top of the viewport */
+      var y = row.getBoundingClientRect().top + window.scrollY - 24;
+      if (lenis) lenis.scrollTo(y, { duration: 0.8 });
+      else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
       if (window.ScrollTrigger) setTimeout(function () { ScrollTrigger.refresh(); }, 550);
     });
   });
@@ -53,7 +61,6 @@
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---------- smooth scroll (Lenis) ---------- */
-  var lenis = null;
   if (window.Lenis) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
